@@ -20,5 +20,6 @@ int bsql_missing(void);
 int bsql_rebuild(const char *path);
 int bsql_doctor(void);
 int bsql_history(const char *path);
+int bsql_id(const char *path);
 
 #endif

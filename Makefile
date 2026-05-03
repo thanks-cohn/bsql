@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -O2 -Iinclude
-SRC=src/main.c src/where.c src/log.c src/location.c src/scan.c src/search.c src/meta.c src/explain.c src/tag.c src/note.c src/summary.c src/sidecar.c src/compile.c src/status.c src/clean.c src/logs.c src/missing.c src/rebuild.c src/doctor.c src/history.c
+SRC=src/main.c src/where.c src/log.c src/location.c src/scan.c src/search.c src/meta.c src/explain.c src/tag.c src/note.c src/summary.c src/sidecar.c src/compile.c src/status.c src/clean.c src/logs.c src/missing.c src/rebuild.c src/doctor.c src/history.c src/id.c
 OUT=build/bsql
 
 all:
@@ -26,6 +26,7 @@ test: all
 	bash tests/test_rebuild.sh
 	bash tests/test_doctor.sh
 	bash tests/test_history.sh
+	bash tests/test_id.sh
 
 install: all
 	mkdir -p ~/.local/bin
