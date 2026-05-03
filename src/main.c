@@ -12,6 +12,7 @@ static void help(void) {
     printf("  bsql find <query>\n");
     printf("  bsql meta <path>\n");
     printf("  bsql explain <query>\n");
+    printf("  bsql tag <path> <tag> [tag...]\n");
     printf("  bsql help\n");
 }
 
@@ -28,9 +29,7 @@ int main(int argc, char **argv) {
 
     if (strcmp(argv[1], "where") == 0) {
         int json = 0;
-        if (argc >= 3 && strcmp(argv[2], "--json") == 0) {
-            json = 1;
-        }
+        if (argc >= 3 && strcmp(argv[2], "--json") == 0) json = 1;
         return bsql_where(json);
     }
 
@@ -72,6 +71,14 @@ int main(int argc, char **argv) {
             return 1;
         }
         return bsql_explain(argv[2]);
+    }
+
+    if (strcmp(argv[1], "tag") == 0) {
+        if (argc < 4) {
+            fprintf(stderr, "bsql tag error: usage: bsql tag <path> <tag> [tag...]\n");
+            return 1;
+        }
+        return bsql_tag(argv[2], argc - 3, &argv[3]);
     }
 
     fprintf(stderr, "bsql error: unknown command: %s\n", argv[1]);

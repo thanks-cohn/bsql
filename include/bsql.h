@@ -8,5 +8,6 @@ int bsql_scan(const char *path);
 int bsql_search(const char *query);
 int bsql_meta(const char *path);
 int bsql_explain(const char *query);
+int bsql_tag(const char *path, int tag_count, char **tags);
 
 #endif
