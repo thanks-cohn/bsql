@@ -10,21 +10,25 @@ int bsql_user(void) {
         return 1;
     }
 
-    printf("BetterSQL user\n\n");
-    printf("Indexing home directory: %s\n\n", home);
+    const char *dirs[] = {
+        "Documents",
+        "Pictures",
+        "Videos",
+        "Desktop",
+        "Downloads"
+    };
 
-    int rc = bsql_rebuild(home);
+    printf("BetterSQL user (focused index)\n\n");
 
-    if (rc == 0) {
-        printf("\nHome search index ready.\n");
-        printf("Try:\n");
-        printf("  bsql search screenshot\n");
-        printf("  bsql search pdf\n");
-        printf("  bsql search invoice\n");
-        bsql_log_event("user", "ok", "Indexed user home directory.");
-    } else {
-        bsql_log_event("user", "error", "Failed to index user home directory.");
+    for (int i = 0; i < 5; i++) {
+        char path[4096];
+        snprintf(path, sizeof(path), "%s/%s", home, dirs[i]);
+
+        printf("[scan] %s\n", path);
+        bsql_rebuild(path);
     }
 
-    return rc;
+    printf("\nUser-focused index complete.\n");
+
+    return 0;
 }
