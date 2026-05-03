@@ -12,6 +12,7 @@ test: all
 	bash tests/test_location.sh
 	bash tests/test_scan.sh
 	bash tests/test_search.sh
+	bash tests/test_meta.sh
 
 install: all
 	mkdir -p ~/.local/bin
