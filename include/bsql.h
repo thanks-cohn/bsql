@@ -16,5 +16,6 @@ int bsql_compile(const char *path);
 int bsql_status(void);
 int bsql_clean(void);
 int bsql_logs(void);
+int bsql_missing(void);
 
 #endif

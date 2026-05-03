@@ -9,6 +9,7 @@ static void help(void) {
     printf("  bsql status\n");
 printf("  bsql clean\n");
 printf("  bsql logs\n");
+printf("  bsql missing\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
     printf("  bsql compile <path>\n");
@@ -50,6 +51,10 @@ int main(int argc, char **argv) {
 
     if (strcmp(argv[1], "logs") == 0) {
         return bsql_logs();
+    }
+
+    if (strcmp(argv[1], "missing") == 0) {
+        return bsql_missing();
     }
 
     if (strcmp(argv[1], "location") == 0) {
