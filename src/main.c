@@ -8,6 +8,9 @@ static void help(void) {
     printf("  bsql where [--json]\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
+    printf("  bsql search <query>\n");
+    printf("  bsql find <query>\n");
+    printf("  bsql meta <path>\n");
     printf("  bsql help\n");
 }
 
@@ -44,6 +47,22 @@ int main(int argc, char **argv) {
             return 1;
         }
         return bsql_scan(argv[2]);
+    }
+
+    if (strcmp(argv[1], "search") == 0 || strcmp(argv[1], "find") == 0) {
+        if (argc < 3) {
+            fprintf(stderr, "bsql search error: missing query\n");
+            return 1;
+        }
+        return bsql_search(argv[2]);
+    }
+
+    if (strcmp(argv[1], "meta") == 0) {
+        if (argc < 3) {
+            fprintf(stderr, "bsql meta error: missing path\n");
+            return 1;
+        }
+        return bsql_meta(argv[2]);
     }
 
     fprintf(stderr, "bsql error: unknown command: %s\n", argv[1]);

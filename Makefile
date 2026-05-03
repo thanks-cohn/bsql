@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -O2 -Iinclude
-SRC=src/main.c src/where.c src/log.c src/location.c src/scan.c
+SRC=src/main.c src/where.c src/log.c src/location.c src/scan.c src/search.c src/meta.c
 OUT=build/bsql
 
 all:
@@ -11,6 +11,7 @@ test: all
 	bash tests/test_where.sh
 	bash tests/test_location.sh
 	bash tests/test_scan.sh
+	bash tests/test_search.sh
 
 install: all
 	mkdir -p ~/.local/bin
