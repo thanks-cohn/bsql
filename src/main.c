@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "bsql.h"
 
@@ -6,24 +7,24 @@ static void help(void) {
     printf("BetterSQL\n\n");
     printf("Usage:\n");
     printf("  bsql where [--json]\n");
-printf("  bsql user\n");
+    printf("  bsql user\n");
     printf("  bsql status\n");
-printf("  bsql doctor\n");
-printf("  bsql repair\n");
-printf("  bsql clean\n");
-printf("  bsql logs\n");
-printf("  bsql missing\n");
-printf("  bsql history <path>\n");
-printf("  bsql id <path>\n");
-printf("  bsql context <path>\n");
+    printf("  bsql doctor\n");
+    printf("  bsql repair\n");
+    printf("  bsql clean\n");
+    printf("  bsql logs\n");
+    printf("  bsql missing\n");
+    printf("  bsql history <path>\n");
+    printf("  bsql id <path>\n");
+    printf("  bsql context <path>\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
     printf("  bsql compile <path>\n");
-printf("  bsql rebuild <path>\n");
-printf("  bsql rebuild-all\n");
-    printf("  bsql search <query>\n");
-printf("  bsql peek <query>\n");
-    printf("  bsql find <query>\n");
+    printf("  bsql rebuild <path>\n");
+    printf("  bsql rebuild-all\n");
+    printf("  bsql search <query> [--limit N]\n");
+    printf("  bsql find <query> [--limit N]\n");
+    printf("  bsql peek <query>\n");
     printf("  bsql meta <path>\n");
     printf("  bsql explain <query>\n");
     printf("  bsql tag <path> <tag> [tag...]\n");
@@ -31,6 +32,27 @@ printf("  bsql peek <query>\n");
     printf("  bsql summary <path> <summary>\n");
     printf("  bsql sidecar <path>\n");
     printf("  bsql help\n");
+}
+
+static int parse_limit(int argc, char **argv) {
+    int limit = -1;
+
+    for (int i = 3; i < argc; i++) {
+        if (strcmp(argv[i], "--limit") == 0) {
+            if (i + 1 >= argc) {
+                fprintf(stderr, "bsql search error: --limit requires a number\n");
+                return -2;
+            }
+            limit = atoi(argv[i + 1]);
+            if (limit < 0) {
+                fprintf(stderr, "bsql search error: --limit must be 0 or greater\n");
+                return -2;
+            }
+            i++;
+        }
+    }
+
+    return limit;
 }
 
 int main(int argc, char **argv) {
@@ -44,39 +66,20 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    if (strcmp(argv[1], "user") == 0) {
-        return bsql_user();
-    }
+    if (strcmp(argv[1], "user") == 0) return bsql_user();
 
     if (strcmp(argv[1], "where") == 0) {
-        int json = 0;
-        if (argc >= 3 && strcmp(argv[2], "--json") == 0) json = 1;
+        int json = (argc >= 3 && strcmp(argv[2], "--json") == 0);
         return bsql_where(json);
     }
 
-    if (strcmp(argv[1], "status") == 0) {
-        return bsql_status();
-    }
-
-    if (strcmp(argv[1], "doctor") == 0) {
-        return bsql_doctor();
-    }
-
-    if (strcmp(argv[1], "repair") == 0) {
-        return bsql_repair();
-    }
-
-    if (strcmp(argv[1], "clean") == 0) {
-        return bsql_clean();
-    }
-
-    if (strcmp(argv[1], "logs") == 0) {
-        return bsql_logs();
-    }
-
-    if (strcmp(argv[1], "missing") == 0) {
-        return bsql_missing();
-    }
+    if (strcmp(argv[1], "status") == 0) return bsql_status();
+    if (strcmp(argv[1], "doctor") == 0) return bsql_doctor();
+    if (strcmp(argv[1], "repair") == 0) return bsql_repair();
+    if (strcmp(argv[1], "clean") == 0) return bsql_clean();
+    if (strcmp(argv[1], "logs") == 0) return bsql_logs();
+    if (strcmp(argv[1], "missing") == 0) return bsql_missing();
+    if (strcmp(argv[1], "rebuild-all") == 0) return bsql_rebuild_all();
 
     if (strcmp(argv[1], "history") == 0) {
         if (argc < 3) {
@@ -126,11 +129,7 @@ int main(int argc, char **argv) {
         return bsql_compile(argv[2]);
     }
 
-    if (strcmp(argv[1], "rebuild-all") == 0) {
-    return bsql_rebuild_all();
-}
-
-if (strcmp(argv[1], "rebuild") == 0) {
+    if (strcmp(argv[1], "rebuild") == 0) {
         if (argc < 3) {
             fprintf(stderr, "bsql rebuild error: missing path\n");
             return 1;
@@ -139,19 +138,23 @@ if (strcmp(argv[1], "rebuild") == 0) {
     }
 
     if (strcmp(argv[1], "peek") == 0) {
-    if (argc < 3) {
-        fprintf(stderr, "bsql peek error: missing query\n");
-        return 1;
+        if (argc < 3) {
+            fprintf(stderr, "bsql peek error: missing query\n");
+            return 1;
+        }
+        return bsql_peek(argv[2]);
     }
-    return bsql_peek(argv[2]);
-}
 
-if (strcmp(argv[1], "search") == 0 || strcmp(argv[1], "find") == 0) {
+    if (strcmp(argv[1], "search") == 0 || strcmp(argv[1], "find") == 0) {
         if (argc < 3) {
             fprintf(stderr, "bsql search error: missing query\n");
             return 1;
         }
-        return bsql_search(argv[2]);
+
+        int limit = parse_limit(argc, argv);
+        if (limit == -2) return 1;
+
+        return bsql_search(argv[2], limit);
     }
 
     if (strcmp(argv[1], "meta") == 0) {

@@ -12,7 +12,9 @@ static void lower_copy(char *dst, const char *src, size_t n) {
     dst[i] = '\0';
 }
 
-int bsql_search(const char *query) {
+
+
+int bsql_search(const char *query, int limit) {
     const char *home = getenv("HOME");
     if (!home) {
         fprintf(stderr, "bsql search error: HOME not set\n");
@@ -36,14 +38,22 @@ int bsql_search(const char *query) {
 
     printf("BetterSQL search: %s\n\n", query);
 
+	
+	int printed = 0;
+
     while (fgets(line, sizeof(line), f)) {
         char lowered[16384];
         lower_copy(lowered, line, sizeof(lowered));
 
-        if (strstr(lowered, q)) {
-            matches++;
-            printf("[%ld] %s", matches, line);
-        }
+if (strstr(lowered, q)) {
+    matches++;
+
+    if (limit == -1 || printed < limit) {
+        printed++;
+        printf("[%d] %s", printed, line);
+    }
+}
+
     }
 
     fclose(f);
