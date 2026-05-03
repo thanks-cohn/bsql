@@ -7,5 +7,6 @@ int bsql_location(const char *path);
 int bsql_scan(const char *path);
 int bsql_search(const char *query);
 int bsql_meta(const char *path);
+int bsql_explain(const char *query);
 
 #endif

@@ -11,6 +11,7 @@ static void help(void) {
     printf("  bsql search <query>\n");
     printf("  bsql find <query>\n");
     printf("  bsql meta <path>\n");
+    printf("  bsql explain <query>\n");
     printf("  bsql help\n");
 }
 
@@ -63,6 +64,14 @@ int main(int argc, char **argv) {
             return 1;
         }
         return bsql_meta(argv[2]);
+    }
+
+    if (strcmp(argv[1], "explain") == 0) {
+        if (argc < 3) {
+            fprintf(stderr, "bsql explain error: missing query\n");
+            return 1;
+        }
+        return bsql_explain(argv[2]);
     }
 
     fprintf(stderr, "bsql error: unknown command: %s\n", argv[1]);
