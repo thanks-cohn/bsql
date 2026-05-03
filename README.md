@@ -43,7 +43,7 @@ bsql search screenshot --limit 5
 
 ---
 
-### 👁️ Human-Friendly Recall (`peek`)
+### Human-Friendly Recall (`peek`)
 
 Quickly see recognizable results:
 
@@ -103,7 +103,7 @@ Every file gets a stable identifier based on its path.
 
 ---
 
-### 🛠️ System Health + Auditability
+###  System Health + Auditability
 
 ```bash
 bsql doctor
