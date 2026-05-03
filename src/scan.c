@@ -135,7 +135,7 @@ int bsql_scan(const char *path) {
     char index_path[4096];
     snprintf(index_path, sizeof(index_path), "%s/.local/share/bsql/index/bsql.index.jsonl", home);
 
-    FILE *index = fopen(index_path, "w");
+    FILE *index = fopen(index_path, "a");
     if (!index) {
         perror("bsql scan fopen");
         return 1;

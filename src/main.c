@@ -20,7 +20,9 @@ printf("  bsql context <path>\n");
     printf("  bsql scan <path>\n");
     printf("  bsql compile <path>\n");
 printf("  bsql rebuild <path>\n");
+printf("  bsql rebuild-all\n");
     printf("  bsql search <query>\n");
+printf("  bsql peek <query>\n");
     printf("  bsql find <query>\n");
     printf("  bsql meta <path>\n");
     printf("  bsql explain <query>\n");
@@ -124,7 +126,11 @@ int main(int argc, char **argv) {
         return bsql_compile(argv[2]);
     }
 
-    if (strcmp(argv[1], "rebuild") == 0) {
+    if (strcmp(argv[1], "rebuild-all") == 0) {
+    return bsql_rebuild_all();
+}
+
+if (strcmp(argv[1], "rebuild") == 0) {
         if (argc < 3) {
             fprintf(stderr, "bsql rebuild error: missing path\n");
             return 1;
@@ -132,7 +138,15 @@ int main(int argc, char **argv) {
         return bsql_rebuild(argv[2]);
     }
 
-    if (strcmp(argv[1], "search") == 0 || strcmp(argv[1], "find") == 0) {
+    if (strcmp(argv[1], "peek") == 0) {
+    if (argc < 3) {
+        fprintf(stderr, "bsql peek error: missing query\n");
+        return 1;
+    }
+    return bsql_peek(argv[2]);
+}
+
+if (strcmp(argv[1], "search") == 0 || strcmp(argv[1], "find") == 0) {
         if (argc < 3) {
             fprintf(stderr, "bsql search error: missing query\n");
             return 1;

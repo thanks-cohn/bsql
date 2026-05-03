@@ -26,3 +26,7 @@ int bsql_repair(void);
 int bsql_user(void);
 
 #endif
+
+int bsql_rebuild_all(void);
+
+int bsql_peek(const char *query);
