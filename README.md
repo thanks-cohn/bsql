@@ -29,7 +29,7 @@ It **augments it**—giving you recall, structure, and speed.
 
 ## Core Capabilities
 
-### 🔍 Instant Search Across Everything
+###  Instant Search Across Everything
 
 Search hundreds of thousands (or millions) of files in milliseconds:
 
@@ -57,7 +57,7 @@ bsql peek screenshot
 
 ---
 
-### 🧠 Structured Memory (Sidecars)
+### Structured Memory (Sidecars)
 
 Attach meaning to files:
 
@@ -77,7 +77,7 @@ No hidden database. Everything is visible, portable, editable.
 
 ---
 
-### 🧩 Full Context View
+###  Full Context View
 
 ```bash
 bsql context <file>
@@ -93,7 +93,7 @@ Shows:
 
 ---
 
-### 🧬 Deterministic Identity
+###  Deterministic Identity
 
 ```bash
 bsql id <file>
@@ -122,7 +122,7 @@ No black boxes. No guessing.
 
 ---
 
-### 🔄 Rebuild + Recovery
+### Rebuild + Recovery
 
 ```bash
 bsql rebuild <path>
