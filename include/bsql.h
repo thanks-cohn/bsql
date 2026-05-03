@@ -18,5 +18,6 @@ int bsql_clean(void);
 int bsql_logs(void);
 int bsql_missing(void);
 int bsql_rebuild(const char *path);
+int bsql_doctor(void);
 
 #endif
