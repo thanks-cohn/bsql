@@ -13,6 +13,7 @@ printf("  bsql logs\n");
 printf("  bsql missing\n");
 printf("  bsql history <path>\n");
 printf("  bsql id <path>\n");
+printf("  bsql context <path>\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
     printf("  bsql compile <path>\n");
@@ -79,6 +80,14 @@ int main(int argc, char **argv) {
             return 1;
         }
         return bsql_id(argv[2]);
+    }
+
+    if (strcmp(argv[1], "context") == 0) {
+        if (argc < 3) {
+            fprintf(stderr, "bsql context error: missing path\n");
+            return 1;
+        }
+        return bsql_context(argv[2]);
     }
 
     if (strcmp(argv[1], "location") == 0) {
