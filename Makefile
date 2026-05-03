@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -O2 -Iinclude
-SRC=src/main.c src/where.c src/log.c src/location.c src/scan.c src/search.c src/meta.c src/explain.c src/tag.c src/note.c src/summary.c src/sidecar.c src/compile.c src/status.c
+SRC=src/main.c src/where.c src/log.c src/location.c src/scan.c src/search.c src/meta.c src/explain.c src/tag.c src/note.c src/summary.c src/sidecar.c src/compile.c src/status.c src/clean.c
 OUT=build/bsql
 
 all:
@@ -20,6 +20,7 @@ test: all
 	bash tests/test_sidecar.sh
 	bash tests/test_compile.sh
 	bash tests/test_status.sh
+	bash tests/test_clean.sh
 
 install: all
 	mkdir -p ~/.local/bin

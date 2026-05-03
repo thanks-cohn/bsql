@@ -14,5 +14,6 @@ int bsql_summary(const char *path, const char *summary);
 int bsql_sidecar(const char *path);
 int bsql_compile(const char *path);
 int bsql_status(void);
+int bsql_clean(void);
 
 #endif
