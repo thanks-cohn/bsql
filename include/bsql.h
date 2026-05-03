@@ -12,5 +12,6 @@ int bsql_tag(const char *path, int tag_count, char **tags);
 int bsql_note(const char *path, const char *note);
 int bsql_summary(const char *path, const char *summary);
 int bsql_sidecar(const char *path);
+int bsql_compile(const char *path);
 
 #endif

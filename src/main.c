@@ -8,6 +8,7 @@ static void help(void) {
     printf("  bsql where [--json]\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
+    printf("  bsql compile <path>\n");
     printf("  bsql search <query>\n");
     printf("  bsql find <query>\n");
     printf("  bsql meta <path>\n");
@@ -50,6 +51,14 @@ int main(int argc, char **argv) {
             return 1;
         }
         return bsql_scan(argv[2]);
+    }
+
+    if (strcmp(argv[1], "compile") == 0) {
+        if (argc < 3) {
+            fprintf(stderr, "bsql compile error: missing path\n");
+            return 1;
+        }
+        return bsql_compile(argv[2]);
     }
 
     if (strcmp(argv[1], "search") == 0 || strcmp(argv[1], "find") == 0) {
