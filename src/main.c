@@ -6,6 +6,7 @@ static void help(void) {
     printf("BetterSQL\n\n");
     printf("Usage:\n");
     printf("  bsql where [--json]\n");
+printf("  bsql user\n");
     printf("  bsql status\n");
 printf("  bsql doctor\n");
 printf("  bsql repair\n");
@@ -39,6 +40,10 @@ int main(int argc, char **argv) {
     if (strcmp(argv[1], "help") == 0 || strcmp(argv[1], "--help") == 0) {
         help();
         return 0;
+    }
+
+    if (strcmp(argv[1], "user") == 0) {
+        return bsql_user();
     }
 
     if (strcmp(argv[1], "where") == 0) {

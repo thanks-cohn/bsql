@@ -23,5 +23,6 @@ int bsql_history(const char *path);
 int bsql_id(const char *path);
 int bsql_context(const char *path);
 int bsql_repair(void);
+int bsql_user(void);
 
 #endif
