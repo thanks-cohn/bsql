@@ -355,14 +355,30 @@ Built to be:
 
 ---
 
-## Final Thought
+## On a powerful machine, BetterSQL scales to massive datasets.
 
-On a powerful machine, BetterSQL scales to massive datasets.
+On a weak machine, it's still blazing fast. 
 
-On a weak machine, it still works.
+-----------------
 
-That’s the point.
+## BetterSQL indexes 1,000,000+ files in minutes and answers queries in ~0.2 seconds.
+It does this with no database, no daemon, and no background state.
 
-```text
+The index is plain JSONL.
+The source of truth is always the filesystem.
+Metadata lives in sidecars, not hidden layers.
+
+Search is a single linear pass over a cache you can read, diff, or delete.
+Recovery is trivial: remove the index and rebuild deterministically.
+
+There is no lock-in, no opaque storage, no dependency chain.
+Everything is inspectable, reproducible, and bounded in behavior.
+
+Performance scales with I/O, not architecture complexity.
+Failure modes are visible and recoverable.
+
+## It is a small, auditable system that replaces an entire class of heavier tools.
+
+## A file search engine you can actually understand end-to-end.
 The smallest,fastest auditable package.
 ```
