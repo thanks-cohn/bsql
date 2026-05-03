@@ -6,6 +6,7 @@ static void help(void) {
     printf("BetterSQL\n\n");
     printf("Usage:\n");
     printf("  bsql where [--json]\n");
+    printf("  bsql status\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
     printf("  bsql compile <path>\n");
@@ -35,6 +36,10 @@ int main(int argc, char **argv) {
         int json = 0;
         if (argc >= 3 && strcmp(argv[2], "--json") == 0) json = 1;
         return bsql_where(json);
+    }
+
+    if (strcmp(argv[1], "status") == 0) {
+        return bsql_status();
     }
 
     if (strcmp(argv[1], "location") == 0) {
