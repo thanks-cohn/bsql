@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -O2 -Iinclude
-SRC=src/main.c src/where.c src/log.c
+SRC=src/main.c src/where.c src/log.c src/location.c
 OUT=build/bsql
 
 all:
@@ -9,6 +9,7 @@ all:
 
 test: all
 	bash tests/test_where.sh
+	bash tests/test_location.sh
 
 install: all
 	mkdir -p ~/.local/bin

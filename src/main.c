@@ -6,6 +6,7 @@ static void help(void) {
     printf("BetterSQL\n\n");
     printf("Usage:\n");
     printf("  bsql where [--json]\n");
+    printf("  bsql location <path>\n");
     printf("  bsql help\n");
 }
 
@@ -26,6 +27,14 @@ int main(int argc, char **argv) {
             json = 1;
         }
         return bsql_where(json);
+    }
+
+    if (strcmp(argv[1], "location") == 0) {
+        if (argc < 3) {
+            fprintf(stderr, "bsql location error: missing path\n");
+            return 1;
+        }
+        return bsql_location(argv[2]);
     }
 
     fprintf(stderr, "bsql error: unknown command: %s\n", argv[1]);
