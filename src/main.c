@@ -11,6 +11,7 @@ printf("  bsql doctor\n");
 printf("  bsql clean\n");
 printf("  bsql logs\n");
 printf("  bsql missing\n");
+printf("  bsql history <path>\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
     printf("  bsql compile <path>\n");
@@ -61,6 +62,14 @@ int main(int argc, char **argv) {
 
     if (strcmp(argv[1], "missing") == 0) {
         return bsql_missing();
+    }
+
+    if (strcmp(argv[1], "history") == 0) {
+        if (argc < 3) {
+            fprintf(stderr, "bsql history error: missing path\n");
+            return 1;
+        }
+        return bsql_history(argv[2]);
     }
 
     if (strcmp(argv[1], "location") == 0) {
