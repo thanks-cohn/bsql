@@ -8,6 +8,7 @@ static void help(void) {
     printf("  bsql where [--json]\n");
     printf("  bsql status\n");
 printf("  bsql clean\n");
+printf("  bsql logs\n");
     printf("  bsql location <path>\n");
     printf("  bsql scan <path>\n");
     printf("  bsql compile <path>\n");
@@ -45,6 +46,10 @@ int main(int argc, char **argv) {
 
     if (strcmp(argv[1], "clean") == 0) {
         return bsql_clean();
+    }
+
+    if (strcmp(argv[1], "logs") == 0) {
+        return bsql_logs();
     }
 
     if (strcmp(argv[1], "location") == 0) {
