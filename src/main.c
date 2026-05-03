@@ -13,6 +13,7 @@ static void help(void) {
     printf("  bsql meta <path>\n");
     printf("  bsql explain <query>\n");
     printf("  bsql tag <path> <tag> [tag...]\n");
+    printf("  bsql note <path> <note>\n");
     printf("  bsql help\n");
 }
 
@@ -79,6 +80,14 @@ int main(int argc, char **argv) {
             return 1;
         }
         return bsql_tag(argv[2], argc - 3, &argv[3]);
+    }
+
+    if (strcmp(argv[1], "note") == 0) {
+        if (argc < 4) {
+            fprintf(stderr, "bsql note error: usage: bsql note <path> <note>\n");
+            return 1;
+        }
+        return bsql_note(argv[2], argv[3]);
     }
 
     fprintf(stderr, "bsql error: unknown command: %s\n", argv[1]);
